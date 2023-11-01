@@ -31,6 +31,8 @@ export default function Home() {
             size: "lg",
             className: "mt-5",
           })}
+          passHref
+          prefetch={false}
         >
           Get Started
           <ArrowRight className="ml-2 h-5 w-5" />
@@ -113,6 +115,8 @@ export default function Home() {
                 Choose a
                 <Link
                   href={"/pricing"}
+                  passHref
+                  prefetch={false}
                   className="text-purple-700 underline underline-offset-2 ml-2"
                 >
                   plan
