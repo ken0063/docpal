@@ -1,7 +1,7 @@
 "use client";
 import Dropzone from "react-dropzone";
 import { DialogHeader, DialogTitle } from "../ui/dialog";
-import { Cloud, File } from "lucide-react";
+import { Cloud, File, Loader } from "lucide-react";
 import { useState } from "react";
 import { Progress } from "../ui/progress";
 import { useUploadThing } from "@/lib/uploadthing";
@@ -103,6 +103,13 @@ const UploadFile = () => {
                       max={100}
                       className="w-full h-1"
                     />
+                    {progress === 100 &&
+                    acceptedFiles[0].type === "application/pdf" ? (
+                      <div className="flex gap-1 items-center justify-center text-center text-purple-500 p-2">
+                        <Loader className="h-3 w-3 animate-ping pr-1" />
+                        Redirecting...
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
                 <input
