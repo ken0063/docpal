@@ -1,12 +1,18 @@
-import React from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, buttonVariants } from "./ui/button";
 import { ArrowRight } from "lucide-react";
-import { SignInButton, SignOutButton, SignUpButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  currentUser,
+} from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const user = await currentUser();
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-300 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
@@ -41,11 +47,20 @@ const Navbar = () => {
                 Pricing
               </Link>
 
-              <SignInButton afterSignInUrl="/dashboard">
-                <Button variant="ghost" size="sm">
-                  Sign In
-                </Button>
-              </SignInButton>
+              {user ? (
+                <SignOutButton
+                  signOutCallback={async () => {
+                    "use server";
+                    await redirect("/");
+                  }}
+                />
+              ) : (
+                <SignInButton afterSignInUrl="/dashboard">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
+                </SignInButton>
+              )}
 
               <SignUpButton afterSignUpUrl="/dashboard">
                 <Button className="ml-4" size="sm">
@@ -53,8 +68,6 @@ const Navbar = () => {
                   <ArrowRight className="ml-1.5 h-5 w-5" />
                 </Button>
               </SignUpButton>
-
-              <SignOutButton />
             </>
           </div>
         </div>
