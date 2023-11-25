@@ -102,10 +102,11 @@ const UploadFile = () => {
                       value={progress}
                       max={100}
                       className="w-full h-1"
+                      color={progress === 100 ? "bg-green-600" : ""}
                     />
                     {progress === 100 &&
                     acceptedFiles[0].type === "application/pdf" ? (
-                      <div className="flex gap-1 items-center justify-center text-center text-purple-500 p-2">
+                      <div className="flex gap-1 items-center justify-center text-center text-green-500 p-2">
                         <Loader className="h-3 w-3 animate-ping pr-1" />
                         Redirecting...
                       </div>

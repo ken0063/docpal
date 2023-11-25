@@ -48,26 +48,30 @@ const Navbar = async () => {
               </Link>
 
               {user ? (
-                <SignOutButton
-                  signOutCallback={async () => {
-                    "use server";
-                    await redirect("/");
-                  }}
-                />
-              ) : (
-                <SignInButton afterSignInUrl="/dashboard">
-                  <Button variant="ghost" size="sm">
-                    Sign In
-                  </Button>
-                </SignInButton>
-              )}
-
-              <SignUpButton afterSignUpUrl="/dashboard">
-                <Button className="ml-4" size="sm">
-                  Get Started
-                  <ArrowRight className="ml-1.5 h-5 w-5" />
+                <Button variant="ghost" asChild className="text-red-600">
+                  <SignOutButton
+                    signOutCallback={async () => {
+                      "use server";
+                      await redirect("/");
+                    }}
+                  />
                 </Button>
-              </SignUpButton>
+              ) : (
+                <>
+                  <SignInButton afterSignInUrl="/dashboard">
+                    <Button variant="ghost" size="sm">
+                      Sign In
+                    </Button>
+                  </SignInButton>
+
+                  <SignUpButton afterSignUpUrl="/dashboard">
+                    <Button className="ml-4" size="sm">
+                      Get Started
+                      <ArrowRight className="ml-1.5 h-5 w-5" />
+                    </Button>
+                  </SignUpButton>
+                </>
+              )}
             </>
           </div>
         </div>
